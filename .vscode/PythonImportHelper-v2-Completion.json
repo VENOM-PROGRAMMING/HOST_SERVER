@@ -1,0 +1,319 @@
+[
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "FTP",
+        "importPath": "ftplib",
+        "description": "ftplib",
+        "isExtraImport": true,
+        "detail": "ftplib",
+        "documentation": {}
+    },
+    {
+        "label": "BytesIO",
+        "importPath": "io",
+        "description": "io",
+        "isExtraImport": true,
+        "detail": "io",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "AAPanelAPI",
+        "importPath": "apis",
+        "description": "apis",
+        "isExtraImport": true,
+        "detail": "apis",
+        "documentation": {}
+    },
+    {
+        "label": "AAPanelAPI",
+        "kind": 6,
+        "importPath": "apis",
+        "description": "apis",
+        "peekOfCode": "class AAPanelAPI:\n    def __init__(self, key, url, domain, url_zip):\n        self.key = key\n        self.url = url\n        self.domain = domain\n        self.url_zip = url_zip\n    def encrypt(self):\n        return {\n            'request_token': hashlib.md5((str(int(time.time())) + hashlib.md5(self.key.encode()).hexdigest()).encode()).hexdigest(),\n            'request_time': int(time.time())",
+        "detail": "apis",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def index():\n    return render_template('admin.html')\n@app.route('/')\ndef login():\n    return render_template('login.html')\nheaders = {\n        'Content-Type': 'application/json',\n        'X-Auth-Email': 'QuirinaRoskop1964@brazilmail.com',\n        'X-Auth-Key': '6ba829957601b260632c8638174bd99aa37fb'\n}",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def login():\n    return render_template('login.html')\nheaders = {\n        'Content-Type': 'application/json',\n        'X-Auth-Email': 'QuirinaRoskop1964@brazilmail.com',\n        'X-Auth-Key': '6ba829957601b260632c8638174bd99aa37fb'\n}\naaPanelApi = 'gOPbM0PJ5zttC8SwlxEtG1oNzq5Ju4ip'\naaPanelHost = 'http://93.123.39.14:21070'\naaPanelFTP_host = \"93.123.39.14\"",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "add_domain",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},\n        'name': domeniu,\n        'type': 'full'\n    }\n    response = requests.post(endpoint, json=data, headers=headers)\n    if response.status_code == 200:\n            print(f'Domeniul {domeniu} a fost adăugat cu succes!')",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "update_dns",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def update_dns(domeniu, ip,type):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    if response.status_code == 200:\n        # return response.json()\n        for res in response.json()['result']:\n            if domeniu == res['name']:\n                zone_id = res['id']\n                json_data = {\n                    'content': ip,",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "check_ua",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def check_ua(domeniu):\n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    if response.status_code == 200:\n        # return response.json()\n        for res in response.json()['result']:\n            if domeniu == res['name']:\n                zone_id = res['id']\n                response = requests.get(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/security_level', headers=headers)\n                if response.status_code == 200:\n                    return response.json()",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "set_ua",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def set_ua(domeniu,sets):\n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    data = {\n        \"value\": sets\n    }\n    if response.status_code == 200:\n        # return response.json()\n        for res in response.json()['result']:\n            if domeniu == res['name']:\n                zone_id = res['id']",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "delete_all_dns",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def delete_all_dns(domeniu):\n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    if response.status_code == 200:\n        for res in response.json()['result']:\n            if domeniu == res['name']:\n                zone_id = res['id']\n                response = requests.get(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records', headers=headers)\n                if response.status_code == 200:\n                    if len(response.json()[\"result\"]) > 0:\n                        p = []",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "domain_info",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def domain_info(domeniu):                        \n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    if response.status_code == 200:\n        domain_found = False\n        # return response.json()\n        for res in response.json()['result']:\n            if domeniu == res['name']:\n                domain_found = True\n                return jsonify({'data': res})\n        if not domain_found:",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "all_domain",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def all_domain():                        \n    response = requests.get('https://api.cloudflare.com/client/v4/zones', headers=headers)\n    if response.status_code == 200:\n        return jsonify({'data': response.json()['result']})\n    else:\n        return jsonify({'message': 'Eroare la obtinerea zonelor: ' + response.text}), response.status_code\n@app.route('/delete_domain/<string:domeniu>', methods=['GET'])\ndef delete_domain(domeniu):                        \n    response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{domeniu}', headers=headers)\n    if response.status_code == 200:",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "delete_domain",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def delete_domain(domeniu):                        \n    response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{domeniu}', headers=headers)\n    if response.status_code == 200:\n        return jsonify({'data': response.json()['result']})\n    else:\n        return jsonify({'message': 'Eroare la obtinerea zonelor: ' + response.text}), response.status_code\n@app.route('/add_site', methods=['POST'])\ndef add_site():\n    domain = request.form.get('domain')\n    zip_url = request.form.get('zip_url')",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "add_site",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def add_site():\n    domain = request.form.get('domain')\n    zip_url = request.form.get('zip_url')\n    url_zip = zip_url\n    api = AAPanelAPI(key=aaPanelApi, url=aaPanelHost, domain=domain, url_zip=url_zip)\n    result = api.addSite(type='php', phpversion='80', port='80', ftp=True, ftpusername='admin1', ftppassword='admin1', sql=True, userdbase='admin1', passdbase='admin1', setSsl=1, forceSsl=0)\n    if 'siteStatus' in str(result):\n        if result['siteStatus']:\n            result = api.add_file(aaPanelFTP_host, aaPanelFTP_port, aaPanelFTP_username, aaPanelFTP_password)\n            return jsonify(result)",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "checksite",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def checksite():\n    api = AAPanelAPI(key=aaPanelApi, url=aaPanelHost, domain=None, url_zip=None)\n    result = api.logs()\n    return jsonify(result)\n@app.route('/delete/<string:id>/<string:names>', methods=['GET'])\ndef delete(names, id):\n    api = AAPanelAPI(key=aaPanelApi, url=aaPanelHost, domain=None, url_zip=None)\n    result = api.delete(names, id)\n    return jsonify(result)\nif __name__ == '__main__':",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "delete",
+        "kind": 2,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "def delete(names, id):\n    api = AAPanelAPI(key=aaPanelApi, url=aaPanelHost, domain=None, url_zip=None)\n    result = api.delete(names, id)\n    return jsonify(result)\nif __name__ == '__main__':\n    app.run(debug=True, host='0.0.0.0', port=3030)",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "app = Flask(__name__, static_folder='static')\n@app.route('/admin')\ndef index():\n    return render_template('admin.html')\n@app.route('/')\ndef login():\n    return render_template('login.html')\nheaders = {\n        'Content-Type': 'application/json',\n        'X-Auth-Email': 'QuirinaRoskop1964@brazilmail.com',",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "headers",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "headers = {\n        'Content-Type': 'application/json',\n        'X-Auth-Email': 'QuirinaRoskop1964@brazilmail.com',\n        'X-Auth-Key': '6ba829957601b260632c8638174bd99aa37fb'\n}\naaPanelApi = 'gOPbM0PJ5zttC8SwlxEtG1oNzq5Ju4ip'\naaPanelHost = 'http://93.123.39.14:21070'\naaPanelFTP_host = \"93.123.39.14\"\naaPanelFTP_username = \"dadadadada\"\naaPanelFTP_port = 21",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelApi",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelApi = 'gOPbM0PJ5zttC8SwlxEtG1oNzq5Ju4ip'\naaPanelHost = 'http://93.123.39.14:21070'\naaPanelFTP_host = \"93.123.39.14\"\naaPanelFTP_username = \"dadadadada\"\naaPanelFTP_port = 21\naaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelHost",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelHost = 'http://93.123.39.14:21070'\naaPanelFTP_host = \"93.123.39.14\"\naaPanelFTP_username = \"dadadadada\"\naaPanelFTP_port = 21\naaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelFTP_host",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelFTP_host = \"93.123.39.14\"\naaPanelFTP_username = \"dadadadada\"\naaPanelFTP_port = 21\naaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelFTP_username",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelFTP_username = \"dadadadada\"\naaPanelFTP_port = 21\naaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},\n        'name': domeniu,",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelFTP_port",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelFTP_port = 21\naaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},\n        'name': domeniu,\n        'type': 'full'",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "aaPanelFTP_password",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "aaPanelFTP_password = 'WxHtiZiTcpLphxKD'\ncloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},\n        'name': domeniu,\n        'type': 'full'\n    }",
+        "detail": "server",
+        "documentation": {}
+    },
+    {
+        "label": "cloudflare_account_id",
+        "kind": 5,
+        "importPath": "server",
+        "description": "server",
+        "peekOfCode": "cloudflare_account_id = '32d3cce87efcd6cff1186f3aa8fb1ea3'\n@app.route('/add_domain/<string:domeniu>', methods=['GET'])\ndef add_domain(domeniu):\n    endpoint = 'https://api.cloudflare.com/client/v4/zones'\n    data = {\n        'account': {'id': cloudflare_account_id},\n        'name': domeniu,\n        'type': 'full'\n    }\n    response = requests.post(endpoint, json=data, headers=headers)",
+        "detail": "server",
+        "documentation": {}
+    }
+]

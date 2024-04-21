@@ -1,0 +1,1505 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title> VENOM | WEBISTE CREATOR</title>
+
+
+    <meta name="description"
+        content="Tool to host the website">
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/demo.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/perfect-scrollbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/typeahead.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/bs-stepper.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/bootstrap-select.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/select2.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/form-validation.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./css/boxicons.min.css') }}">
+  
+    <style>
+        .succes{
+            border: 2px solid green !important;;
+        }
+        .false{
+            border: 2px solid rgb(255, 0, 0) !important;;
+        }
+        #template-customizer {
+            font-family: "Open Sans", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+            font-size: inherit !important;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            z-index: 99999999;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 400px;
+            background: #fff;
+            -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2);
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2);
+            -webkit-transition: all .2s ease-in;
+            -o-transition: all .2s ease-in;
+            transition: all .2s ease-in;
+            -webkit-transform: translateX(420px);
+            -ms-transform: translateX(420px);
+            transform: translateX(420px)
+        }
+
+        #template-customizer h5 {
+            position: relative;
+            font-size: 11px
+        }
+
+        #template-customizer>h5 {
+            flex: 0 0 auto
+        }
+
+        #template-customizer .disabled {
+            color: #d1d2d3 !important
+        }
+
+        #template-customizer .form-label {
+            font-size: .9375rem
+        }
+
+        #template-customizer .form-check-label {
+            font-size: .8125rem
+        }
+
+        #template-customizer .template-customizer-t-panel_header {
+            font-size: 1.125rem
+        }
+
+        #template-customizer.template-customizer-open {
+            -webkit-transition-delay: .1s;
+            -o-transition-delay: .1s;
+            transition-delay: .1s;
+            -webkit-transform: none !important;
+            -ms-transform: none !important;
+            transform: none !important
+        }
+
+        #template-customizer.template-customizer-open .custom-option.checked {
+            color: var(--bs-primary);
+            border-width: 2px
+        }
+
+        #template-customizer.template-customizer-open .custom-option.checked .custom-option-content {
+            border: none
+        }
+
+        #template-customizer.template-customizer-open .custom-option .custom-option-content {
+            border: 1px solid rgba(0, 0, 0, 0)
+        }
+
+        #template-customizer .template-customizer-header a:hover {
+            color: inherit !important
+        }
+
+        #template-customizer .template-customizer-open-btn {
+            position: absolute;
+            top: 180px;
+            left: 0;
+            z-index: -1;
+            display: block;
+            width: 42px;
+            height: 42px;
+            border-top-left-radius: 15%;
+            border-bottom-left-radius: 15%;
+            background: var(--bs-primary);
+            color: #fff !important;
+            text-align: center;
+            font-size: 18px !important;
+            line-height: 42px;
+            opacity: 1;
+            -webkit-transition: all .1s linear .2s;
+            -o-transition: all .1s linear .2s;
+            transition: all .1s linear .2s;
+            -webkit-transform: translateX(-62px);
+            -ms-transform: translateX(-62px);
+            transform: translateX(-62px)
+        }
+
+        @media(max-width: 991.98px) {
+            #template-customizer .template-customizer-open-btn {
+                top: 145px
+            }
+        }
+
+        .dark-style #template-customizer .template-customizer-open-btn {
+            background: var(--bs-primary)
+        }
+
+        #template-customizer .template-customizer-open-btn::before {
+            content: "";
+            width: 22px;
+            height: 22px;
+            display: block;
+            background-size: 100% 100%;
+            position: absolute;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABClJREFUaEPtmY1RFEEQhbsjUCIQIhAiUCNQIxAiECIQIxAiECIAIpAMhAiECIQI2vquZqnZvp6fhb3SK5mqq6Ju92b69bzXf6is+dI1t1+eAfztG5z1BsxsU0S+ici2iPB3vm5E5EpEDlSVv2dZswFIxv8UkZcNy+5EZGcuEHMCOBeR951uvVDVD53vVl+bE8DvDu8Pxtyo6ta/BsByg1R15Bwzqz5/LJgn34CZwfnPInI4BUB6/1hV0cSjVxcAM4PbcBZjL0XklIPN7Is3fLCkdQPpPYw/VNXj5IhPIvJWRIhSl6p60ULWBGBm30Vk123EwRxCuIzWkkjNrCZywith10ewE1Xdq4GoAjCz/RTXW44Ynt+LyBEfT43kYfbj86J3w5Q32DNcRQDpwF+dkQXDMey8xem0L3TEqB4g3PZWad8agBMRgZPeu96D1/C2Zbh3X0p80Op1xxloztN48bMQQNoc7+eLEuAoPSPiIDY4Ooo+E6ixeNXM+D3GERz2U3CIqMstLJUgJQDe+7eq6mub0NYEkLAKwEHkiBQDCZtddZCZ8d6r7JDwFkoARklHRPZUFVDVZWbwGuNrC4EfdOzFrRABh3Wnqhv+d70AEBLGFROPmeHlnM81G69UdSd6IUuM0GgUVn1uqWmg5EmMfBeEyB7Pe3txBkY+rGT8j0J+WXq/BgDkUCaqLgEAnwcRog0veMIqFAAwCy2wnw+bI2GaGboBgF9k5N0o0rUSGUb4eO0BeO9j/GYhkSHMHMTIqwGARX6p6a+nlPBl8kZuXMD9j6pKfF9aZuaFOdJCEL5D4eYb9wCYVCanrBmGyii/tIq+SLj/HQBCaM5bLzwfPqdQ6FpVHyra4IbuVbXaY7dETC2ESPNNWiIOi69CcdgSMXsh4tNSUiklMgwmC0aNd08Y5WAES6HHehM4gu97wyhBgWpgqXsrASglprDy7CwhehMZOSbK6JMSma+Fio1KltCmlBIj7gfZOGx8ppQSXrhzFnOhJ/31BDkjFHRvOd09x0mRBA9SFgxUgHpQg0q0t5ymPMlL+EnldFTfDA0NAmf+OTQ0X0sRouf7NNkYGhrOYNrxtIaGg83MNzVDSe3LXLhP7O/yrCsCz1zlWTpjWkuZAOBpX3yVnLqI1yLCOKU6qMrmP7SSrUEw54XF4WBIK5FxCMOr3lVsfGqNSmPzBXUnJTIX1jyVBq9wO6UObOpgC5GjO98vFKnTdQMZXxEsWZlDiCZMIxAbNxQOqlpVZtobejBaZNoBnRDzMFpkxvTQOD36BlrcySZuI6p1ACB6LU3wWuf5581+oHfD1vi89bz3nFUC8Nm7ZlP3nKkFbM4bWPt/MSFwklprYItwt6cmvpWJ2IVcQBCz6bLysSCv3SaANCiTsnaNRrNRqMXVVT1/BrAqz/buu/Y38Ad3KC5PARej0QAAAABJRU5ErkJggg==);
+            margin: 10px
+        }
+
+        .customizer-hide #template-customizer .template-customizer-open-btn {
+            display: none
+        }
+
+        [dir=rtl] #template-customizer .template-customizer-open-btn {
+            border-radius: 0;
+            border-top-right-radius: 15%;
+            border-bottom-right-radius: 15%
+        }
+
+        [dir=rtl] #template-customizer .template-customizer-open-btn::before {
+            margin-left: -2px
+        }
+
+        #template-customizer.template-customizer-open .template-customizer-open-btn {
+            opacity: 0;
+            -webkit-transition-delay: 0s;
+            -o-transition-delay: 0s;
+            transition-delay: 0s;
+            -webkit-transform: none !important;
+            -ms-transform: none !important;
+            transform: none !important
+        }
+
+        #template-customizer .template-customizer-inner {
+            position: relative;
+            overflow: auto;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+            opacity: 1;
+            -webkit-transition: opacity .2s;
+            -o-transition: opacity .2s;
+            transition: opacity .2s
+        }
+
+        #template-customizer .template-customizer-inner>div:first-child>hr:first-of-type {
+            display: none !important
+        }
+
+        #template-customizer .template-customizer-inner>div:first-child>h5:first-of-type {
+            padding-top: 0 !important
+        }
+
+        #template-customizer .template-customizer-themes-inner {
+            position: relative;
+            opacity: 1;
+            -webkit-transition: opacity .2s;
+            -o-transition: opacity .2s;
+            transition: opacity .2s
+        }
+
+        #template-customizer .template-customizer-theme-item {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -ms-flex-align: center;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 100%;
+            flex: 1 1 100%;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 0 24px;
+            width: 100%;
+            cursor: pointer
+        }
+
+        #template-customizer .template-customizer-theme-item input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0
+        }
+
+        #template-customizer .template-customizer-theme-item input~span {
+            opacity: .25;
+            -webkit-transition: all .2s;
+            -o-transition: all .2s;
+            transition: all .2s
+        }
+
+        #template-customizer .template-customizer-theme-item .template-customizer-theme-checkmark {
+            display: inline-block;
+            width: 6px;
+            height: 12px;
+            border-right: 1px solid;
+            border-bottom: 1px solid;
+            opacity: 0;
+            -webkit-transition: all .2s;
+            -o-transition: all .2s;
+            transition: all .2s;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg)
+        }
+
+        [dir=rtl] #template-customizer .template-customizer-theme-item .template-customizer-theme-checkmark {
+            border-right: none;
+            border-left: 1px solid;
+            -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg)
+        }
+
+        #template-customizer .template-customizer-theme-item input:checked:not([disabled])~span,
+        #template-customizer .template-customizer-theme-item:hover input:not([disabled])~span {
+            opacity: 1
+        }
+
+        #template-customizer .template-customizer-theme-item input:checked:not([disabled])~span .template-customizer-theme-checkmark {
+            opacity: 1
+        }
+
+        #template-customizer .template-customizer-theme-colors span {
+            display: block;
+            margin: 0 1px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset
+        }
+
+        #template-customizer.template-customizer-loading .template-customizer-inner,
+        #template-customizer.template-customizer-loading-theme .template-customizer-themes-inner {
+            opacity: .2
+        }
+
+        #template-customizer.template-customizer-loading .template-customizer-inner::after,
+        #template-customizer.template-customizer-loading-theme .template-customizer-themes-inner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            display: block
+        }
+
+        @media(max-width: 1200px) {
+            #template-customizer {
+                display: none;
+                visibility: hidden !important
+            }
+        }
+
+        @media(max-width: 575.98px) {
+            #template-customizer {
+                width: 300px;
+                -webkit-transform: translateX(320px);
+                -ms-transform: translateX(320px);
+                transform: translateX(320px)
+            }
+        }
+
+        .layout-menu-100vh #template-customizer {
+            height: 100vh
+        }
+
+        [dir=rtl] #template-customizer {
+            right: auto;
+            left: 0;
+            -webkit-transform: translateX(-420px);
+            -ms-transform: translateX(-420px);
+            transform: translateX(-420px)
+        }
+
+        [dir=rtl] #template-customizer .template-customizer-open-btn {
+            right: 0;
+            left: auto;
+            -webkit-transform: translateX(62px);
+            -ms-transform: translateX(62px);
+            transform: translateX(62px)
+        }
+
+        [dir=rtl] #template-customizer .template-customizer-close-btn {
+            right: auto;
+            left: 0
+        }
+
+        #template-customizer .template-customizer-layouts-options[disabled] {
+            opacity: .5;
+            pointer-events: none
+        }
+
+        [dir=rtl] .template-customizer-t-style_switch_light {
+            padding-right: 0 !important
+        }
+
+
+
+        .lds-spinner {
+  color: official;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 37px;
+  width: 6px;
+  height: 18px;
+  border-radius: 20%;
+  background: #fff;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+    </style>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <link rel="stylesheet" type="text/css"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/rtl/core-dark.css"
+        class="template-customizer-core-css">
+    <link rel="stylesheet" type="text/css"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/rtl/theme-default-dark.css"
+        class="template-customizer-theme-css">
+
+    <link rel="stylesheet" href="https://a.omappapi.com/app/js/api.min.css" id="omapi-css" media="all">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C700&amp;display=swap">
+</head>
+
+<body>
+    <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+        <div class="layout-container">
+            <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+                <div class="container-xxl">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none  ">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                        <!-- <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="https://i.ebayimg.com/images/g/mpoAAOSwdRdgU02-/s-l1600.jpg"
+                                            alt="" class="w-px-40 h-auto rounded-circle">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                                            <span class="align-middle">Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+            </nav>
+
+
+            <div class="popup" id="popup_dom" style="display: none; width: 100%; height: 100%;  justify-content: center;  position: absolute; z-index: 999; margin-top: 100px; backdrop-filter: blur(5px); ">
+                <div style="width: 500px; height: 500px; display: flex; justify-content: center; align-items: center;" >
+                    <div class="col-xxl">
+                        <div class="card mb-4">
+                          <h5 class="card-header" style="padding-bottom: 5px;">ADD SUBDOMAIN</h5>
+                          <small style="margin-left: 24px; max-width: 400px;" >Ensure that the domain is already functional and added to the panel & cloudflare!</small>
+                          <form class="card-body">
+                            <h6>Subdomain Details</h6>
+                            <div class="row mb-3">
+                              <label class="col-sm-3 col-form-label" for="multicol-email">Subdomain</label>
+                              <div class="col-sm-9">
+                                <div class="input-group input-group-merge">
+                                  <input type="text" id="multicol_email" class="form-control" placeholder="support">
+                                  <span class="input-group-text" id="multicol-email2"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row form-password-toggle">
+                              <label class="col-sm-3 col-form-label" for="multicol-password">UPLAOD ZIP</label>
+                              <div class="col-sm-9">
+                                <div class="input-group input-group-merge">
+                                  <input type="text" id="multicol-password" class="form-control" placeholder="https://filebin.net..." aria-describedby="multicol-password2">
+                                </div>
+                              </div>
+                            </div>
+                            <hr class="my-4 mx-n4">
+                            
+                            <div id="text_sub" style="display: none; justify-content: center; width: 100%; flex-direction: column;"> 
+                                <h5 style="padding-bottom: 5px;color: rgb(43, 255, 0);">Successfully Added.</h5>
+                                <small style="color: green;"  id="domeniu_inner_text">https://dwdwdw.com</small>
+                            </div>
+                            
+
+                            <div id="laodings_popup" style="display: none; justify-content: center; width: 100%;">
+                                <div class="">
+                                    <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                              <div class="row justify-content-end">
+                                <div class="col-sm-9">
+                                  <button type="button" class="btn btn-primary me-sm-2 me-1" onclick="add_subdomain_url()">Submit</button>
+                                  <button type="button" class="btn btn-label-secondary" onclick="cancels()">Cancel</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="layout-page">
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="py-3 mb-4">
+                            <span class="text-muted fw-light"></span> ADD DOMAIN
+                        </h4>
+                        <!-- Default -->
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <small class="text-light fw-medium">VENOM WEBISTE</small>
+                                <div id="wizard-validation" class="bs-stepper mt-2 linear">
+                                  <div class="bs-stepper-header">
+                                    <div class="step active" data-target="#account-details-validation">
+                                      <button type="button" class="step-trigger" aria-selected="true">
+                                        <span class="bs-stepper-circle">1</span>
+                                        <span class="bs-stepper-label mt-1">
+                                          <span class="bs-stepper-title">Add Domain Cloudflare</span>
+                                          <span class="bs-stepper-subtitle">Setup Domain Details</span>
+                                        </span>
+                                      </button>
+                                    </div>
+                                    <div class="line">
+                                      <i class="bx bx-chevron-right"></i>
+                                    </div>
+                                    <div class="step" data-target="#personal-info-validation">
+                                      <button type="button" class="step-trigger" aria-selected="false" disabled="disabled">
+                                        <span class="bs-stepper-circle">2</span>
+                                        <span class="bs-stepper-label mt-1">
+                                          <span class="bs-stepper-title">Update Nameserver</span>
+                                          <span class="bs-stepper-subtitle">Add nameserver</span>
+                                        </span>
+                                      </button>
+                                    </div>
+                                    <div class="line">
+                                      <i class="bx bx-chevron-right"></i>
+                                    </div>
+                                    <div class="step" data-target="#social-links-validation">
+                                      <button type="button" class="step-trigger" aria-selected="false" disabled="disabled">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label mt-1">
+                                          <span class="bs-stepper-title">Upload Zip File</span>
+                                          <span class="bs-stepper-subtitle">Build website</span>
+                                        </span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div class="bs-stepper-content">
+                                    <form id="wizard-validation-form" onsubmit="return false">
+                                      <!-- Account Details -->
+                                      <div id="account-details-validation" class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework">
+                                        <div class="content-header mb-3">
+                                          <h6 class="mb-0">Domain Name</h6>
+                                          <small>Please enter only lowercase letters.</small>
+                                        </div>
+                                        <div class="row g-3">
+                                          <div class="col-sm-6 fv-plugins-icon-container">
+                                            <label class="form-label" for="formValidationUsername">Domain:</label>
+                                            <input type="text" name="formValidationDomain" id="formValidationUsername" class="form-control" placeholder="example.com">
+                                          <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+                                          <div class="col-12 d-flex justify-content-between">
+                                            
+                                            <button class="btn btn-label-secondary btn-prev" disabled="">
+                                              <i class='bx bxs-chevron-left' ></i>
+                                              <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                            </button>
+                                            <button class="btn btn-primary btn-next" id="nexts"  disabled style="cursor: pointer;">
+                                              <span class="align-middle d-sm-inline-block d-none me-sm-1" >Next</span>
+                                              <i class='bx bxs-chevron-right' ></i>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                       
+                                      <!-- Personal Info -->
+                                      <div id="personal-info-validation" class="content fv-plugins-bootstrap5 fv-plugins-framework">
+                                        <div class="content-header mb-3">
+                                          <h6 class="mb-0">Update Nameserver</h6>
+                                          <small></small>
+                                        </div>
+
+
+                                        <div class="row g-3" style="flex-direction: column;">
+                                            <span id="error" style="text-transform: uppercase;"></span>
+                                          <div style="display: none;" id="ns">
+                                            <div class="col-sm-6 fv-plugins-icon-container">
+                                                <label class="form-label" for="dns1">NAMESERVER #1.</label>
+                                                <input type="text" id="dns1" name="formValidationFirstName" class="form-control" value="" disabled>
+                                              <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+                                              
+                                              <div class="col-sm-6 fv-plugins-icon-container">
+                                                <label class="form-label" for="dns2">NAMESERVER #2.</label>
+                                                <input type="text" id="dns2" name="formValidationFirstName" class="form-control" value="" disabled>
+                                              <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+                                              
+                                          </div>
+
+                                          
+                                          <div id="loadind">
+                                            <div class="col-sm-6 fv-plugins-icon-container">
+                                                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                            </div>
+                                          </div>
+                                          
+
+
+
+
+                                          <div class="col-12 d-flex justify-content-between">
+                                            <button class="btn btn-primary btn-prev">
+                                              <i class='bx bxs-chevron-left' ></i>
+                                              <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                            </button>
+                                            <div >
+                                                <button class="btn btn-primary" disabled id="check_dns">
+                                                    <span class="align-middle d-sm-inline-block d-none me-sm-1">CHECK NS</span>
+                                                    <i class='bx bxs-chevron-right' ></i>
+                                                  </button>
+                                                  
+                                                  <button class="btn btn-primary btn-next" id="nextbtns" disabled>
+                                                    <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                    <i class='bx bxs-chevron-right' ></i>
+                                                  </button>
+                                            </div>
+                                           
+                                        </div>
+                                        </div>
+                                      </div>
+                                      <!-- Social Links -->
+                                      <span id="errorssssssssss" style="text-transform: uppercase;"></span>
+                                      <div id="social-links-validation" class="content fv-plugins-bootstrap5 fv-plugins-framework">
+                                        <div class="content-header mb-3">
+                                          <h6 class="mb-0">Upload FILE</h6>
+                                          <small>Please use: <span ><a style="font-size: 16px; text-decoration: underline; color: green;" href="https://filebin.net">https://filebin.net</a></span></small>
+                                          
+                                        </div>
+                                        <span id="xas" style="font-size: 20px; color: rgb(198, 208, 0);"></span>
+                                        <div class="row g-3">
+                                          <div class="col-sm-6 fv-plugins-icon-container" id="form_upload_file">
+                                            <label class="form-label" for="filebin">Filebin</label>
+                                            <input type="text" name="filebin" id="filebin" class="form-control" placeholder="https://filebin.net/abc/file.zip">
+                                          </div>
+
+
+
+
+                                          <div id="logd" style="display: none;">
+                                            <div class="col-sm-6 fv-plugins-icon-container">
+                                                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                            </div>
+                                          </div>
+
+
+
+                                          <div class="col-12 d-flex justify-content-between">
+                                            <button class="btn btn-primary btn-prev">
+                                              <i class='bx bxs-chevron-left' ></i>
+                                              <span class="align-middle d-sm-inline-block d-none" id="prev">Previous</span>
+                                            </button>
+                                            <button class="btn btn-success" id="subbmites">Submit</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+
+                                    <div class="col-12 mb-4" id="webpreview" style="display: none;">
+                                        <small class="text-light fw-medium">WEBSITE PREVIEW: <span id="domains" style="font-size: 20px; color: green;"></span></small>
+                                        <div class="bs-stepper wizard-numbered mt-2" id="preview">
+                                          
+                                      </div>
+                                    </div>
+
+
+
+
+                                      
+                                </div>
+                               
+                                </div>
+                              </div>
+                            <div class="bs-stepper wizard-numbered mt-2">
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <div class="card">
+                            <div class="col-12 d-flex justify-content-between" style="align-items: center; padding-right: 20px;">   
+                                <h5 class="card-header">CLOUDFLARE DOMAIN LIST</h5>
+                                <div style="cursor: pointer; display: flex; gap: 10px;" id="show_cloudflare_data">
+                                    <span class="badge  bg-label-success" id="showdata">Show Data</span>
+                                    <span class="badge  bg-label-primary" id="hide_data" style="display: none;" onclick="hide_table()">Hide Data</span>
+                                </div>
+                               
+
+                            </div>
+                            <div class="col-12 d-flex justify-content-center" >
+                                <div id="xloading" style="display: none!important;" >
+                                    <div class="col-sm-6 fv-plugins-icon-container">
+                                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="card-datatable dataTable_select text-nowrap" style="display: none;" id="tablesx">
+                                <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="table-responsive">
+                                        <table class="dt-select-table table table-bordered dataTable no-footer dt-checkboxes-select"
+                                            id="DataTables_Table_3" aria-describedby="DataTables_Table_3_info" style="width: 1416px;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
+                                                        colspan="1" style="width: 10px;"
+                                                        aria-label="Name: activate to sort column ascending" aria-sort="descending">ID</th>
+
+                                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
+                                                        colspan="1" style="width: 152.333px;"
+                                                        aria-label="Name: activate to sort column ascending" aria-sort="descending">Domain Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 226.333px;" aria-label="Position: activate to sort column ascending">
+                                                        NAMESERVER 1</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 228.333px;" aria-label="Email: activate to sort column ascending">NAMESERVER 2
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 164.333px;" aria-label="City: activate to sort column ascending">STATUS</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 164.333px;" aria-label="City: activate to sort column ascending">SECURITY LEVEL</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 75.3333px;" aria-label="Date: activate to sort column ascending">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_insert">
+                                                
+                                                
+                                            </tbody>
+                                        </table>
+                                        <div style="width: 1%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="card" style="margin-top: 20px;">
+                            <div class="col-12 d-flex justify-content-between" style="align-items: center; padding-right: 20px;">   
+                                <h5 class="card-header">AAPANEL DOMAIN</h5>
+                                <div style="cursor: pointer; display: flex; gap: 10px;" id="show_cloudflare_data">
+                                    <span class="badge  bg-label-success" id="showdata_cpanel">Show Data</span>
+                                    <span class="badge  bg-label-primary" id="hide_data_cpanel" style="display: none;" onclick="hide_table_cpanel()">Hide Data</span>
+                                </div>
+
+                            </div>
+                            <div class="col-12 d-flex justify-content-center" >
+                                <div id="xloading_cpanel" style="display: none!important;" >
+                                    <div class="col-sm-6 fv-plugins-icon-container">
+                                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="card-datatable dataTable_select text-nowrap"  id="tablesx_cpanel" style="display: none;">
+                                <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="table-responsive">
+                                        <table class="dt-select-table table table-bordered dataTable no-footer dt-checkboxes-select"
+                                            id="DataTables_Table_3" aria-describedby="DataTables_Table_3_info" style="width: 1416px;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
+                                                        colspan="1" style="width: 10px;"
+                                                        aria-label="Name: activate to sort column ascending" aria-sort="descending">ID</th>
+
+                                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
+                                                        colspan="1" style="width: 152.333px;"
+                                                        aria-label="Name: activate to sort column ascending" aria-sort="descending">ROOT DIR</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 226.333px;" aria-label="Position: activate to sort column ascending">
+                                                        NAMESERVER 1</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 228.333px;" aria-label="Email: activate to sort column ascending">PHP VERSION
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 164.333px;" aria-label="City: activate to sort column ascending">STATUS</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
+                                                        style="width: 75.3333px;" aria-label="Date: activate to sort column ascending">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_insert_cpanel">
+                                                
+                                            </tbody>
+                                        </table>
+                                        <div style="width: 1%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
+            </div>
+            <!--/ Layout container -->
+        </div>
+        
+        
+    </div>
+
+        <script>
+            var ifs = '93.123.39.14'
+
+            
+            const domainInput = document.getElementById('formValidationUsername');
+            const submitButton = document.getElementById('nexts');
+
+
+            var dns1 = document.getElementById('dns1')
+            var dns2 = document.getElementById('dns2')
+
+            var ns = document.getElementById('ns')
+            var loadind = document.getElementById('loadind')
+            var error = document.getElementById('error')
+            var check_dns = document.querySelector('#check_dns')
+
+            domainInput.addEventListener('input', function() {
+                if (isValidDomain(domainInput.value)) {
+                    submitButton.disabled = false; // Activează butonul
+                } else {
+                    submitButton.disabled = true; // Dezactivează butonul
+                }
+            });
+            function isValidDomain(domain) {
+                var domainRegex = /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,20}$/;
+                return domainRegex.test(domain);
+            }
+        
+            submitButton.addEventListener('click', function () {
+                sendRequest()
+            })
+            function sendRequest() {
+                    var domainInput_val = $('#formValidationUsername').val();
+                    localStorage.setItem('domain', domainInput_val)
+                    $.ajax({
+                        url: `/add_domain/${domainInput_val}`,
+                        type: 'GET',
+                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                        success: function(response) {
+                            if (response.errors.length > 0){
+                                console.log(response.errors[0].message);
+                                error.innerHTML = response.errors[0].message;
+                                $.ajax({
+                                        url: `/get_domain_info/${domainInput_val}`,
+                                        type: 'GET',
+                                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                                        success: function(response) { 
+                                            ns.style.display = 'block';
+                                            console.log(response);
+                                            loadind.style.display = 'none';
+                                            dns1.value =  response.data.name_servers[0]
+                                            dns2.value =  response.data.name_servers[1]
+                                            check_dns.disabled = false;
+                                           },error: function(xhr, status, error) {
+                                                console.log(error.errors);
+                                            }}
+                                        )
+                            }else{
+                                console.log(response.result.name_servers)
+                                dns1.value =  response.result.name_servers[0]
+                                dns2.value =  response.result.name_servers[1]
+                                loadind.style.display = 'none';
+                                ns.style.display = 'block';
+                                check_dns.disabled = false;
+                            }    
+                            
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error.errors);
+                        }
+                    });
+                }
+        
+        
+        
+        
+                
+        
+                check_dns.addEventListener('click', function x() {
+                    get_status()
+                })
+        
+               
+                function get_status() { 
+                    const submitButton = document.getElementById('nextbtns');
+                    ns.style.display = 'none';
+                    loadind.style.display = 'block';
+                    domainInput_val = localStorage.getItem('domain')
+
+                    $.ajax({
+                        url: `/get_domain_info/${domainInput_val}`,
+                        type: 'GET',
+                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                        success: function(response) { 
+                            ns.style.display = 'block';
+                            loadind.style.display = 'none';
+                            if (response.data.status == 'active'){
+                                dns1.classList.add('succes');
+                                dns2.classList.add('succes');
+                                submitButton.disabled = false;
+                                $.ajax({
+                                    url: `/delete_all_dns/${domainInput_val}`,
+                                    type: 'GET',
+                                    contentType: 'application/json', 
+                                    success: function(response) { 
+                                       console.log(response);
+                                       $.ajax({
+                                                url: `/update_dns/${domainInput_val}/${ifs}/*`,
+                                                type: 'GET',
+                                                contentType: 'application/json', 
+                                                success: function(response) { 
+                                                console.log(response);
+                                            }}) 
+                                        $.ajax({
+                                                url: `/update_dns/${domainInput_val}/${ifs}/www`,
+                                                type: 'GET',
+                                                contentType: 'application/json', 
+                                                success: function(response) { 
+                                                console.log(response);
+                                            }}) 
+                                        $.ajax({
+                                            url: `/update_dns/${domainInput_val}/${ifs}/@`,
+                                            type: 'GET',
+                                            contentType: 'application/json', 
+                                            success: function(response) { 
+                                            console.log(response);
+                                        }}) 
+                                        
+                                }})    
+                            }else{
+                                dns1.classList.add('false');
+                                dns2.classList.add('false');
+                            }
+                            console.log(response.data.status);
+                        },error: function(xhr, status, error) {
+                                console.log(error.errors);
+                    }}
+                    )
+                }
+
+
+                   
+                var subbmites = document.querySelector('#subbmites')
+                var prev = document.querySelector('#prev')
+                var social = document.querySelector('#social-links-validation')
+                
+                subbmites.addEventListener('click', function x() {
+                    var filebin = $('#filebin').val().trim();
+                    var s = document.querySelector('#filebin')
+                    var form_upload_file = document.querySelector('#form_upload_file')
+                    var domainInput_val = localStorage.getItem('domain')
+                    var logd = document.querySelector('#logd')
+                    var webpreview = document.querySelector('#webpreview')
+                    var domains = document.querySelector('#domains')
+                   
+                    if (filebin === '') {
+                        s.classList.add('false');
+                    } else {
+                        s.classList.remove('false');
+                        console.log(filebin)
+                        console.log(domainInput_val)
+                        form_upload_file.style.display = 'none';
+                        logd.style.display = 'block';
+                        subbmites.disabled = true;
+                        prev.disabled = true;
+
+                        $.ajax({
+                            url: '/add_site',
+                            type: 'POST',
+                            data: {
+                                domain: domainInput_val,
+                                zip_url: filebin
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                if(response == true){
+                                    social.style.display = 'none';
+                                    logd.style.display = 'none';
+                                    webpreview.style.display = 'block';
+                                    var websiteUrl = `https://${domainInput_val}`;
+                                    domains.innerHTML = websiteUrl
+                                    var iframe = document.createElement('iframe');
+                                    iframe.src = websiteUrl;
+                                    iframe.style.width = '100%';
+                                    iframe.style.height = '100%';
+                                    iframe.style.border = 'none';
+                                    document.getElementById('preview').appendChild(iframe);
+                                
+                                }
+                                else if(response.error === 'The site you tried to add already exists!'){
+                                        var xas = document.getElementById('xas')
+                                        social.style.display = 'block';
+                                        logd.style.display = 'none';
+                                        xas.innerHTML = response.error + '  ' +  '<span style="color:red"> *** Please delete it from the admin panel and try again!</span>';
+                                    }
+                                else{
+                                    social.style.display = 'none';
+                                    logd.style.display = 'none';
+                                    var error = document.getElementById('errorssssssssss')
+                                    error.innerHTML = response.error;
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                                // Aici puteți trata erorile în cazul în care cererea întâmpină o problemă
+                            }
+                        });
+
+                    }    
+
+                })
+
+                
+
+                var show_cloudflare_data = document.querySelector('#show_cloudflare_data')
+                var showdata = document.querySelector('#showdata')
+                var hide_data = document.querySelector('#hide_data')
+                
+
+                showdata.addEventListener('click',  ()=>{
+                    get_domains()
+                })
+                    
+                
+                
+                function get_domains() { 
+                        var xloading = document.querySelector('#xloading')
+                        var tablesx = document.querySelector('#tablesx')
+                        var tbody_insert = document.querySelector('#tbody_insert')
+
+                        tablesx.style.display = 'none';
+                        tbody_insert.innerHTML = '';
+                        xloading.style.display = 'block';
+                        $.ajax({
+                            url: `/all_domain`,
+                            type: 'GET',
+                            contentType: 'application/json', // Setarea tipului de conținut la JSON
+                            success: function(response) { 
+
+                                response.data.forEach((element, index) => {
+                                    var  security_ = ''
+                                    
+                                                            $.ajax({
+                                        url: `/check_ua/${element.name}`,
+                                        type: 'GET',
+                                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                                        success: function(response) {  
+                                            showdata.innerHTML = 'RECHECK'
+                                            hide_data.style.display = 'block';
+                                            xloading.style.display = 'none';
+                                            tablesx.style.display = 'block';
+                                                console.log(response.result.value)
+                                                if (response.result.value == 'under_attack'){
+                                                    security_ = `<td > 
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Under Attack</button>
+                                                                        <ul class="dropdown-menu" style="">
+                                                                        <li><a class="dropdown-item" onclick = "underatack('essentially_off', '${element.name}' )">Essentially Off</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('low', '${element.name}')">Low</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('medium', '${element.name}')">Medium</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('high', '${element.name}')">High</a></li>
+                                                                    </div>
+                                                                 </td>`
+                                                }else{
+                                                    var datax = 'Medium'
+                                                    if (response.result.value =='essentially_off'){
+                                                            datax = 'Essentially Off'
+                                                    }else if(response.result.value =='low'){
+                                                        datax = 'Low'
+                                                    }else if(response.result.value =='medium'){
+                                                        datax = 'Medium'
+                                                    }else if(response.result.value =='high'){
+                                                        datax = 'High'
+                                                    }else if(response.result.value =='under_attack'){
+                                                        datax = 'Under Attack'
+                                                    }
+
+                                                    security_ = `<td > 
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${datax}</button>
+                                                                        <ul class="dropdown-menu" style="">
+                                                                        <li><a class="dropdown-item" onclick = "underatack('essentially_off', '${element.name}' )">Essentially Off</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('low', '${element.name}')">Low</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('medium', '${element.name}')">Medium</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('high', '${element.name}')">High</a></li>
+                                                                        <li><a class="dropdown-item" onclick = "underatack('under_attack', '${element.name}')">Under Attack</a></li>
+                                                                    </div>
+                                                                 </td>`
+                                                }
+                                                
+                                                if (element.status == "pending"){
+                                                        htmldata = ` <tr class="odd">
+                                                            <td class="sorting_1">${index+1}</td>
+                                                            <td class="sorting_1">${element.name}</td>
+                                                            <td>${element.name_servers[0]}</td>
+                                                            <td>${element.name_servers[1]}</td>
+                                                            <td><span class="badge  bg-label-warning">${element.status}</span></td>
+                                                            ${security_}
+                                                            <td>
+                                                                <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
+                                                                        data-bs-toggle="dropdown"><i style="font-size: 25px;" class='bx bxs-grid' ></i></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end m-0">
+                                                                        <a class="dropdown-item text-danger delete-record" onclick = "delete_cloudflare('${element.id}')" > Delete </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>`
+                                                        tbody_insert.innerHTML += htmldata
+
+                                                    }else if (element.status == "active"){
+                                                        htmldata = `
+                                                        <tr class="odd">
+                                                            <td class="sorting_1">${index+1}</td>
+                                                            <td class="sorting_1">${element.name}</td>
+                                                            <td>${element.name_servers[0]}</td>
+                                                            <td>${element.name_servers[1]}</td>
+                                                            <td><span class="badge  bg-label-success">${element.status}</span></td>
+                                                            ${security_}
+                                                            
+                                                            
+                                                            <td>
+                                                                <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
+                                                                        data-bs-toggle="dropdown"><i style="font-size: 25px;" class='bx bxs-grid' ></i></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end m-0">
+                                                                        <a class="dropdown-item text-danger delete-record" onclick = "delete_cloudflare('${element.id}')"> Delete </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    `
+                                                    tbody_insert.innerHTML += htmldata
+
+                                                    }else{
+                                                        htmldata = `
+                                                        <tr class="odd">
+                                                            <td class="sorting_1">${index+1}</td>
+                                                            <td class="sorting_1">${element.name}</td>
+                                                            <td>${element.name_servers[0]}</td>
+                                                            <td>${element.name_servers[1]}</td>
+                                                            <td><span class="badge  bg-label-info">${element.status}</span></td>
+                                                            <td><span class="badge  bg-label-warning">SECURITY LEVEL</span></td>
+                                                            <td>
+                                                                <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
+                                                                        data-bs-toggle="dropdown"><i style="font-size: 25px;" class='bx bxs-grid' ></i></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end m-0">
+                                                                    
+                                                                        <a class="dropdown-item text-danger delete-record" onclick = "delete_cloudflare('${element.id}')"> Delete </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    `
+                                                    tbody_insert.innerHTML += htmldata
+                                                    }
+                                        
+                                            },error: function(xhr, status, error) {
+                                                console.log(error.errors);
+                                            }})
+
+                                    
+                                        
+
+                                
+                                });
+                            
+                            },error: function(xhr, status, error) {
+                            console.log(error.errors);
+                        }}
+                        )
+                    }
+
+                function underatack(type, domain) {
+                    var xloading = document.querySelector('#xloading')
+                    var tablesx = document.querySelector('#tablesx')
+                    var tbody_insert = document.querySelector('#tbody_insert')
+                    tablesx.style.display = 'none';
+                    tbody_insert.innerHTML = '';
+                    xloading.style.display = 'block';
+                    $.ajax({
+                        url: `/set_ua/${domain}/${type}`,
+                        type: 'GET',
+                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                        success: function(response) { 
+                            get_domains()                     
+                        },error: function(xhr, status, error) {
+                        console.log(error);
+                    }}
+                    )
+                }        
+
+
+                function hide_table() {
+                    var tablesx = document.querySelector('#tablesx')
+                    var showdata = document.querySelector('#showdata')
+                    var hide_data = document.querySelector('#hide_data')
+                    tablesx.style.display = 'none';
+                    hide_data.style.display = 'none';
+                    showdata.innerHTML = 'Show Data'
+                }
+
+                function delete_cloudflare(params) {
+                    var xloading = document.querySelector('#xloading')
+                    var tablesx = document.querySelector('#tablesx')
+                    var tbody_insert = document.querySelector('#tbody_insert')
+                        tablesx.style.display = 'none';
+                        tbody_insert.innerHTML = '';
+                        xloading.style.display = 'block';
+
+
+
+                    $.ajax({
+                        url: `/delete_domain/${params}`,
+                        type: 'GET',
+                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                        success: function(response) { 
+                            get_domains()                     
+                        },error: function(xhr, status, error) {
+                        console.log(error);
+                    }}
+                    )
+                }
+
+
+                
+                var show_cloudflare_data = document.querySelector('#show_cloudflare_data')
+                var showdata_cpanel = document.querySelector('#showdata_cpanel')
+                var hide_data_cpanel = document.querySelector('#hide_data_cpanel')
+                
+
+                showdata_cpanel.addEventListener('click',  () =>{
+                    x()
+                })
+                    function x() {  
+                    var tablesx_cpanel = document.querySelector('#tablesx_cpanel')
+                       
+                        var xloading_cpanel = document.querySelector('#xloading_cpanel')
+                        var tbody_insert_cpanel = document.querySelector('#tbody_insert_cpanel')
+
+                        // tbody_insert_cpanel.style.display = 'none';
+                        tbody_insert_cpanel.innerHTML = '';
+                        xloading_cpanel.style.display = 'block';
+
+                        tablesx_cpanel.style.display = 'none';
+                        $.ajax({
+                            url: `/checksite`,
+                            type: 'GET',
+                            contentType: 'application/json', // Setarea tipului de conținut la JSON
+                            success: function(response) { 
+                                tablesx_cpanel.style.display = 'block';
+                                xloading_cpanel.style.display = 'none';
+                                hide_data_cpanel.style.display = 'block'
+                                showdata_cpanel.innerHTML = 'RECHECK';
+                                response.data.forEach((element, index) => {
+                                if (element.status == 1){
+                                    htmldata = ` <tr class="odd">
+                                        <td class="sorting_1">${index+1}</td>
+                                        <td class="sorting_1">${element.name}</td>
+                                        <td>${element.path}</td>
+                                        <td>${element.php_version}</td>
+                                        <td><span class="badge  bg-label-success">ACTIVE</span></td>
+                                        <td>
+                                            <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown"><i style="font-size: 25px;" class='bx bxs-grid' ></i></a>
+                                                <div class="dropdown-menu dropdown-menu-end m-0">
+                                                    <a class="dropdown-item text-danger delete-record" onclick = "delete_aapanel('${element.name}/${element.id}')" > Delete </a>
+                                                    <a class="dropdown-item text-warning delete-record" onclick = "add_subdomain('${element.name}')" > ADD SUBDOMAIN </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`
+                                }else{
+                                    htmldata = ` <tr class="odd">
+                                        <td class="sorting_1">${index+1}</td>
+                                        <td class="sorting_1">${element.name}</td>
+                                        <td>${element.path}</td>
+                                        <td>${element.php_version}</td>
+                                        <td><span class="badge  bg-label-success">${element.status}</span></td>
+                                        <td>
+                                            <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown"><i style="font-size: 25px;" class='bx bxs-grid' ></i></a>
+                                                <div class="dropdown-menu dropdown-menu-end m-0">
+                                                    <a class="dropdown-item text-danger delete-record" onclick = "delete_aapanel('${element.name}/${element.id}')" > Delete </a>
+                                                    <a class="dropdown-item text-warning delete-record" onclick = "add_subdomain('${element.name}')" > ADD SUBDOMAIN </a>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`
+                                }
+                                    
+                                tbody_insert_cpanel.innerHTML += htmldata
+
+
+
+                                });
+                            
+                            },error: function(xhr, status, error) {
+                            console.log(error.errors);
+                        }})
+
+
+
+
+                     }
+
+
+                
+                function hide_table_cpanel() {
+                    var tablesx_cpanel = document.querySelector('#tablesx_cpanel')
+                    var showdata_cpanel = document.querySelector('#showdata_cpanel')
+                    var hide_data_cpanel = document.querySelector('#hide_data_cpanel')
+                    tablesx_cpanel.style.display = 'none';
+                    hide_data_cpanel.style.display = 'none';
+                    showdata_cpanel.innerHTML = 'Show Data'
+                
+                }
+
+
+                function delete_aapanel(a) {
+                  alert(a)
+                  $.ajax({
+                        url: `/delete/${a}`,
+                        type: 'GET',
+                        contentType: 'application/json', // Setarea tipului de conținut la JSON
+                        success: function(response) { 
+                            x()               
+                        },error: function(xhr, status, error) {
+                        console.log(error);
+                    }}
+                 )
+            }
+
+
+
+
+
+            function add_subdomain(a) {
+                var popup_dom = document.querySelector('#popup_dom')
+                var multicol= document.querySelector('#multicol-email2')
+                popup_dom.style.display = 'flex';    
+                multicol.innerHTML = `.${a}`    
+            }
+            function add_subdomain_url(a) {
+                var popup_dom = document.querySelector('#popup_dom')
+
+                var multicol_email= document.querySelector('#multicol_email')
+                var multicol= document.querySelector('#multicol-email2')
+                var multicol_password= document.querySelector('#multicol-password')
+                
+                var laodings_popup= document.querySelector('#laodings_popup')
+
+                laodings_popup.style.display = 'flex'
+                
+
+
+
+
+
+
+                var text_sub= document.querySelector('#text_sub')
+                var domeniu_inner_text= document.querySelector('#domeniu_inner_text')
+
+
+
+
+                  $.ajax({
+                    url: '/add_site',
+                    type: 'POST',
+                    data: {
+                    domain: multicol_email.value + '' + multicol.innerText,
+                    zip_url: multicol_password.value
+
+                    },
+                    success: function(response) { 
+                        laodings_popup.style.display = 'none'
+                        text_sub.style.display = 'flex'
+                        domeniu_inner_text.innerHTML = `https://${multicol_email.value + '' + multicol.innerText}`
+
+                        setTimeout(() => {
+                            popup_dom.style.display = 'none'
+                             x()               
+                        }, 6000);
+
+
+
+
+
+                    },error: function(xhr, status, error) {
+                    console.log(error);
+                    }}
+                 )
+            }
+
+            function cancels(a) {
+                var popup_dom = document.querySelector('#popup_dom')
+                popup_dom.style.display = 'none';    
+
+                //   $.ajax({
+                //         url: `/delete/${a}`,
+                //         type: 'GET',
+                //         contentType: 'application/json', // Setarea tipului de conținut la JSON
+                //         success: function(response) { 
+                //             x()               
+                //         },error: function(xhr, status, error) {
+                //         console.log(error);
+                //     }}
+                //  )
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </script>
+
+    <script src="{{ url_for('static', filename='./js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/hammer.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/typeahead.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/bs-stepper.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/bootstrap-select.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/select2.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/popular.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/bootstrap5.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/auto-focus.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/form-wizard-numbered.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/form-wizard-validation.js') }}"></script>
+    </body>
+
+</html>

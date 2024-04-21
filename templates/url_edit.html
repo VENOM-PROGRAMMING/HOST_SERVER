@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Preview</title>
+<style>
+    /* Stiluri pentru a controla aspectul iframe */
+    #preview {
+        width: 100%;
+        height: 500px; /* Ajustați înălțimea după preferințele dvs. */
+        border: 1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+
+<h2>Preview Website</h2>
+
+<!-- Div-ul în care se va afișa preview-ul site-ului -->
+<div id="preview"></div>
+
+<script>
+    // URL-ul site-ului pe care doriți să îl afișați în preview
+    var websiteUrl = 'https://probascript.shop';
+
+    // Creează un iframe și setează atributul src la URL-ul site-ului
+    var iframe = document.createElement('iframe');
+    iframe.src = websiteUrl;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+
+    // Adaugă iframe-ul la div-ul de previzualizare
+    document.getElementById('preview').appendChild(iframe);
+</script>
+
+</body>
+</html>
